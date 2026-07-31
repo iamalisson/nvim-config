@@ -5,6 +5,11 @@ return {
       explorer = {
         replace_netrw = false,
       },
+      picker = {
+        sources = {
+          files = { hidden = true, ignored = true },
+        },
+      },
     },
   },
 }
