@@ -13,3 +13,18 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format({ async = false })
   end,
 })
+
+-- Tell kitty (OSC 7) which dir we're "in": the project root of the current
+-- buffer. kitty's `launch --cwd=last_reported` (ctrl+shift+enter/t) then opens
+-- new windows there, even if nvim itself was started from another dir.
+if vim.env.KITTY_WINDOW_ID then
+  vim.api.nvim_create_autocmd({ "BufEnter", "DirChanged" }, {
+    group = vim.api.nvim_create_augroup("kitty_osc7", { clear = true }),
+    callback = function()
+      local dir = LazyVim.root()
+      if vim.fn.isdirectory(dir) == 1 then
+        vim.api.nvim_ui_send("\027]7;" .. vim.uri_from_fname(dir) .. "\027\\")
+      end
+    end,
+  })
+end
