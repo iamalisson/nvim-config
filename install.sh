@@ -3,7 +3,7 @@
 # Usage: ./install.sh
 set -euo pipefail
 
-REPO_URL="https://github.com/1111111111111111111114oLvT2/nvim-config.git"
+REPO_URL="https://github.com/iamalisson/nvim-config.git"
 TARGET="$HOME/.config/nvim"
 
 command -v nvim >/dev/null || { echo "nvim not found. Install Neovim >= 0.9 first."; exit 1; }
